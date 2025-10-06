@@ -1,0 +1,207 @@
+:root {
+  --primary: #EC4899;
+  --secondary: #8B5CF6;
+  --success: #10B981;
+  --error: #EF4444;
+  --background: #FDF2F8;
+  --surface: #FFFFFF;
+  --text: #374151;
+
+  --grey: #CBD5E1;
+  --yellow: #F59E0B;
+  --green: var(--success);
+
+  --tile-size: 56px;
+  --radius: 14px;
+  --shadow: 0 6px 16px rgba(31, 41, 55, 0.08);
+}
+
+[data-theme="dark"] {
+  --background: #0f172a;
+  --surface: #111827;
+  --text: #e5e7eb;
+  --grey: #374151;
+  --yellow: #D97706;
+  --green: #059669;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--background);
+  color: var(--text);
+}
+
+/* Header */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 16px 56px 16px 16px;
+  background: linear-gradient(135deg, #FCE7F3, #EDE9FE, #DBEAFE);
+  border-bottom: 2px solid #FBCFE8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+[data-theme="dark"] .app-header {
+  background: linear-gradient(135deg, #4c1d95, #1f2937, #0f172a);
+  border-bottom-color: #4c1d95;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.theme-toggle {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--secondary);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.theme-toggle:hover {
+  transform: translateY(-1px);
+}
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+/* Main container */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Status text */
+.status {
+  text-align: center;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* Grid */
+.board {
+  display: grid;
+  grid-template-rows: repeat(5, var(--tile-size));
+  gap: 10px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(6, var(--tile-size));
+  gap: 10px;
+}
+.tile {
+  width: var(--tile-size);
+  height: var(--tile-size);
+  border-radius: var(--radius);
+  border: 2px solid #FBCFE8;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 20px;
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
+  transition: transform 120ms ease, background-color 120ms ease, border-color 120ms ease;
+}
+.tile.filled {
+  border-color: var(--secondary);
+}
+.tile.green {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+.tile.yellow {
+  background: var(--yellow);
+  color: #111827;
+  border-color: var(--yellow);
+}
+.tile.grey {
+  background: var(--grey);
+  color: #111827;
+  border-color: var(--grey);
+}
+
+/* Keyboard */
+.keyboard {
+  margin-top: 20px;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8px;
+  justify-content: center;
+}
+.kb-row {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 8px;
+  justify-content: center;
+}
+.key {
+  min-width: 36px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 2px solid #E9D5FF;
+  background: #FFF;
+  color: var(--text);
+  font-weight: 800;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: var(--shadow);
+  transition: transform 60ms ease, background-color 120ms ease, border-color 120ms ease;
+}
+.key:hover {
+  transform: translateY(-1px);
+  background: #F8FAFC;
+}
+.key:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+.key.special {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.key.backspace {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: #fff;
+}
+
+/* Footer note */
+.footer-note {
+  text-align: center;
+  color: #6B7280;
+  font-size: 12px;
+  margin: 12px 0 24px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  :root { --tile-size: 44px; }
+  .app-title { font-size: 20px; }
+  .theme-toggle { top: 8px; right: 8px; padding: 6px 12px; }
+}
